@@ -1,0 +1,107 @@
+{
+  "name": "MCP Lead Pipeline",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "manual-trigger",
+      "name": "Run Pipeline",
+      "type": "n8n-nodes-base.manualTrigger",
+      "position": [200, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://127.0.0.1:3333/mcp/generate_leads",
+        "method": "POST",
+        "jsonParameters": true,
+        "bodyParametersJson": {
+          "count": 200
+        }
+      },
+      "id": "generate-leads",
+      "name": "Generate Leads",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [420, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://127.0.0.1:3333/mcp/enrich_leads",
+        "method": "POST"
+      },
+      "id": "enrich-leads",
+      "name": "Enrich Leads",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [640, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://127.0.0.1:3333/mcp/generate_messages",
+        "method": "POST"
+      },
+      "id": "generate-messages",
+      "name": "Generate Messages",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [860, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://127.0.0.1:3333/mcp/send_outreach",
+        "method": "POST",
+        "jsonParameters": true,
+        "bodyParametersJson": {
+          "dry_run": true
+        }
+      },
+      "id": "send-outreach",
+      "name": "Send Outreach",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [1080, 300]
+    }
+  ],
+  "connections": {
+    "Run Pipeline": {
+      "main": [
+        [
+          {
+            "node": "Generate Leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Leads": {
+      "main": [
+        [
+          {
+            "node": "Enrich Leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enrich Leads": {
+      "main": [
+        [
+          {
+            "node": "Generate Messages",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Messages": {
+      "main": [
+        [
+          {
+            "node": "Send Outreach",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false
+}
