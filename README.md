@@ -1,8 +1,10 @@
 # MCP-Powered Lead Generation, Enrichment & Outreach Pipeline
 
+<img width="1412" height="774" alt="Screenshot 2026-01-07 at 11 26 05 PM" src="https://github.com/user-attachments/assets/f6d883bc-8ee3-43a9-ad31-391f082340d2" />
+
 A full-stack demo system that uses the Model Context Protocol (MCP) to orchestrate lead generation, enrichment, personalized messaging, and outreach, with n8n for automation and a Streamlit frontend for real-time monitoring. This project is built entirely using free and open-source tools and is designed to demonstrate agent-style orchestration, stateful pipelines, and production-grade error handling.
 
-## 🚀 Features
+## Features
 
 - Synthetic but realistic lead generation
 - Rule-based lead enrichment
@@ -14,7 +16,7 @@ A full-stack demo system that uses the Model Context Protocol (MCP) to orchestra
 - Persistent pipeline state using SQLite
 - Defensive error handling with FAILED isolation
 
-## 🧠 Architecture Overview
+## Architecture Overview
 ```
 Streamlit UI
      |
@@ -35,7 +37,7 @@ n8n (workflow orchestration)
 - n8n handles orchestration and retries
 - Frontend is read-only + trigger-based
 
-## 📁 Project Structure
+## Project Structure
 ```
 lead_agent/
 ├── mcp-server/
@@ -56,7 +58,7 @@ lead_agent/
 └── README.md
 ```
 
-## 🧩 MCP Tools Implemented
+## MCP Tools Implemented
 
 | Tool | Description |
 |------|-------------|
@@ -68,7 +70,7 @@ lead_agent/
 | `/mcp/leads` | Get lead list for UI |
 | `/health` | Health check |
 
-## 🔄 Pipeline State Machine
+## Pipeline State Machine
 ```
 NEW → ENRICHED → MESSAGED → SENT
  ↘
@@ -81,20 +83,20 @@ NEW → ENRICHED → MESSAGED → SENT
 
 ## ⚙️ Setup Instructions
 
-### 1️⃣ Prerequisites
+### Prerequisites
 
 - Python 3.9+
 - Node.js 18+
 - n8n (local or Docker)
 - Git
 
-### 2️⃣ Clone Repository
+### Clone Repository
 ```bash
 git clone 
 cd lead_agent
 ```
 
-### 3️⃣ Set Up MCP Server
+### Set Up MCP Server
 ```bash
 cd mcp-server
 python -m venv env
@@ -110,7 +112,7 @@ uvicorn server:app --host 0.0.0.0 --port 3333
 
 Verify: http://127.0.0.1:3333/docs
 
-### 4️⃣ Set Up n8n
+### Set Up n8n
 
 Install n8n:
 ```bash
@@ -129,7 +131,7 @@ Import workflow:
 2. Upload `n8n/mcp_workflow.json`
 3. Save
 
-### 5️⃣ Run Streamlit Frontend
+### Run Streamlit Frontend
 ```bash
 cd frontend
 pip install streamlit requests pandas
@@ -138,7 +140,7 @@ streamlit run app.py
 
 Open: http://localhost:8501
 
-## ▶️ Running the Pipeline
+## Running the Pipeline
 
 You can trigger the pipeline in two ways:
 
@@ -154,7 +156,7 @@ You can trigger the pipeline in two ways:
 2. Click **Execute Workflow**
 3. Monitor progress in Streamlit
 
-## ⏱️ Runtime Expectations
+## Runtime Expectations
 
 | Step | Time |
 |------|------|
@@ -166,7 +168,7 @@ You can trigger the pipeline in two ways:
 
 *(Depends on lead count and rate limits)*
 
-## 📊 Streamlit Dashboard
+## Streamlit Dashboard
 
 The UI shows:
 
@@ -177,27 +179,14 @@ The UI shows:
 - Run pipeline controls
 - Dry-run toggle
 
-## 🧪 Error Handling
+## Error Handling
 
 - All steps are defensively coded
 - One bad lead never crashes the batch
 - Failed leads are marked **FAILED**
 - Remaining leads continue processing
 
-## 🔒 Free & Safe by Design
-
-- ✅ No paid APIs
-- ✅ No scraping
-- ✅ No LinkedIn automation
-- ✅ Dry-run outreach by default
-- ✅ SQLite for local persistence
-- ✅ Secrets not required
-
-## 🧠 How to Explain This Project (Interview-Ready)
-
-> "We use MCP to expose pipeline steps as tools, n8n for orchestration, and a Streamlit UI for observability. State is persisted in SQLite, and the system is resilient to partial failures."
-
-## 🏁 Submission Checklist
+## Submission Checklist
 
 - ✔ MCP server implemented
 - ✔ n8n orchestration
@@ -207,16 +196,3 @@ The UI shows:
 - ✔ Free tools only
 - ✔ Demo-ready
 
-## 📌 Notes
-
-- `data.db` is auto-created on first run
-- Metrics are cumulative across runs
-- Reset DB by deleting `mcp-server/data.db`
-
-## 🙌 Acknowledgements
-
-- [FastAPI](https://fastapi.tiangolo.com/)
-- [n8n](https://n8n.io/)
-- [Streamlit](https://streamlit.io/)
-- [SQLite](https://www.sqlite.org/)
-- [Faker](https://faker.readthedocs.io/)
