@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+faker
+pydantic
+sqlite-utils
+jinja2
