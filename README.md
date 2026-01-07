@@ -188,11 +188,11 @@ The UI shows:
 
 ## Submission Checklist
 
-- ✔ MCP server implemented
-- ✔ n8n orchestration
-- ✔ Agent-style pipeline
-- ✔ Persistent state
-- ✔ Frontend monitoring
-- ✔ Free tools only
-- ✔ Demo-ready
+- MCP server implemented
+- n8n orchestration
+- Agent-style pipeline
+- Persistent state
+- Frontend monitoring
+- Free tools only
+- Demo-ready
 
